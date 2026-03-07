@@ -379,6 +379,7 @@ async def buyKey(request_data: buyKeyRequest, user_id: int = Depends(get_current
             subscription_service_instance = subscription_service(sub_repo)
             await subscription_service_instance.buy_subscription(
                 user_id=user_id,
+                tariff='tariff-1',
                 days=int(os.getenv("DAYS_1"))
             )
 
@@ -407,6 +408,7 @@ async def buyKey(request_data: buyKeyRequest, user_id: int = Depends(get_current
             subscription_service_instance = subscription_service(sub_repo)
             await subscription_service_instance.buy_subscription(
                 user_id=user_id,
+                tariff='tariff-2',
                 days=int(os.getenv("DAYS_2"))
             )
 
@@ -435,6 +437,7 @@ async def buyKey(request_data: buyKeyRequest, user_id: int = Depends(get_current
             subscription_service_instance = subscription_service(sub_repo)
             await subscription_service_instance.buy_subscription(
                 user_id=user_id,
+                tariff='tariff-3',
                 days=int(os.getenv("DAYS_3"))
             )
 
