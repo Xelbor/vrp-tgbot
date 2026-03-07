@@ -338,10 +338,7 @@ async def buyKey(request_data: buyKeyRequest, user_id: int = Depends(get_current
 
             subscription_service_instance = subscription_service(sub_repo)
 
-            await subscription_service_instance.give_trial(
-                user_id,
-                15
-            )
+            await subscription_service_instance.give_trial(user_id)
 
             return JSONResponse(
                 status_code=200,
