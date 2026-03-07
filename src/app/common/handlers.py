@@ -114,7 +114,7 @@ async def buy_key(message: types.Message):
 
 @router.callback_query(F.data.startswith("buy_key_"))
 async def buy_key_handler(call: types.CallbackQuery):
-    title, amount, days = prices_key[call.data]
+    title, amount, days, tariff = prices_key[call.data]
     amount_rub = amount / 100
 
     user_balance = user_repo.get_balance(call.from_user.id)
@@ -134,7 +134,11 @@ async def buy_key_handler(call: types.CallbackQuery):
     sub_repo = SubscriptionRepository()
     subscription_service_instance = subscription_service(sub_repo)
 
-    sub_link = await subscription_service_instance.buy_subscription(user_id=call.from_user.id, days=days)
+    sub_link = await subscription_service_instance.buy_subscription(
+        user_id=call.from_user.id,
+        tariff=tariff,
+        days=days
+    )
     
     await call.message.answer(key_text + f"\n{sub_link}", parse_mode='html')
 

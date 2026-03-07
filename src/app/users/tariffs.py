@@ -9,9 +9,9 @@ DAYS_2 = int(os.getenv("DAYS_2"))
 DAYS_3 = int(os.getenv("DAYS_3"))
 
 prices_key = {
-    "buy_key_14": ("Ключ на 14 дней", PRICE_1, DAYS_1),
-    "buy_key_30": ("Ключ на 30 дней", PRICE_2, DAYS_2),
-    "buy_key_60": ("Ключ на 60 дней", PRICE_3, DAYS_3),
+    "buy_key_14": ("Ключ на 14 дней", PRICE_1, DAYS_1, "tariff-1"),
+    "buy_key_30": ("Ключ на 30 дней", PRICE_2, DAYS_2, "tariff-2"),
+    "buy_key_60": ("Ключ на 60 дней", PRICE_3, DAYS_3, "tariff-3"),
 }
 
 prices_balance = {

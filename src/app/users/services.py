@@ -50,12 +50,12 @@ class subscription_service:
     def __init__(self, sub_repo: SubscriptionRepository):
         self.sub_repo = sub_repo
 
-    async def buy_subscription(self, user_id: int, days: int):
+    async def buy_subscription(self, user_id: int, tariff: str, days: int):
         active_paid = self.sub_repo.get_active_paid(user_id)
 
         if active_paid:
             link = active_paid[0]
-            await utils.expand_subscribe_link(user_id, link, days)
+            await utils.expand_subscribe_link(user_id, link, tariff, days)
 
             return link
         
@@ -79,7 +79,7 @@ class subscription_service:
         #    vpn_keys = [sub[0] for sub in subs]
         #    return vpn_keys[0]
 
-        subscribe_link = await utils.create_a_subscribe_link(user_id, days)
+        subscribe_link = await utils.create_a_subscribe_link(user_id, days, tariff)
         
         if (subscribe_link):
             sub = await self.sub_repo.add_subscription(user_id, 'paid', subscribe_link, days)
