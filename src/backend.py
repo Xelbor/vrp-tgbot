@@ -261,6 +261,12 @@ async def home(user_id: int = Depends(get_current_user)):
     
     user_subscription_links = await utils.get_user_links(str(user_id))
 
+    if user_subscription_links is None:
+        return {
+            "balance": balance,
+            "subscriptions": []
+        }
+
     subscriptions_data = []
 
     for sub in user_subscription_links:
