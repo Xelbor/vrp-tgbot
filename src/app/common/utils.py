@@ -110,7 +110,7 @@ async def expand_subscribe_link(telegram_id: int, sub_link: str, tariff: str, da
                 base_date = user.expire_at if user.expire_at > now else now
                 new_expire = base_date + timedelta(days=days)
 
-                await remnawave.users.reset_user_traffic(uuid)
+                await remnawave.users.reset_user_traffic(str(uuid))
 
                 await remnawave.users.update_user(
                     UpdateUserRequestDto(
