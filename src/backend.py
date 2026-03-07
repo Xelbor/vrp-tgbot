@@ -275,6 +275,7 @@ async def home(user_id: int = Depends(get_current_user)):
         status = await utils.get_subscribtion_status(str(user_id), sub)
         end_date = await utils.get_subscribe_end_date(str(user_id), sub)
         traffic = await utils.get_user_traffic(str(user_id), sub)
+        traffic_limit = await utils.get_user_traffic(str(user_id), sub)
         devices = await utils.get_user_devices(str(user_id), sub)
 
         subscriptions_data.append({
@@ -283,6 +284,7 @@ async def home(user_id: int = Depends(get_current_user)):
             "status": status,
             "end_date": end_date,
             "traffic": traffic,
+            "traffic_limit": traffic_limit,
             "devices": devices
         })
 

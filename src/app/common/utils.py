@@ -151,6 +151,21 @@ async def get_user_traffic(user_id: int, sub_link) -> int | None:
         
         for user in users:
             if user.subscription_url == sub_link:
+                return user.trafficLimitBytes
+
+    except Exception as e:
+        print(e)
+        return None
+    
+async def get_user_traffic(user_id: int, sub_link) -> int | None:
+    try:
+        users = await remnawave.users.get_users_by_telegram_id(user_id)
+
+        if not users:
+            return None
+        
+        for user in users:
+            if user.subscription_url == sub_link:
                 return user.user_traffic.used_traffic_bytes
 
     except Exception as e:
