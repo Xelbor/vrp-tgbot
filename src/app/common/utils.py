@@ -44,12 +44,16 @@ async def create_a_subscribe_link(telegram_id, expiryTime, tariff):
 
     match tariff:
         case "trial":
+            limit_bytes = 16106127360
             external_squad_uuid = 'd7f71a0d-0769-485f-bfad-33d0d27fa0bf'
         case "tariff-1":
+            limit_bytes = 32212254720
             external_squad_uuid = 'a9dddb0e-1b30-4792-b11e-55f73153e5e3'
         case "tariff-2":
+            limit_bytes = None
             external_squad_uuid = '486e8d21-b21f-44da-8905-0f8027054c93'
         case "tariff-3":
+            limit_bytes = None
             external_squad_uuid = 'c7c7625b-3f03-40e5-a3e8-722fa01c7fda'
 
     try:
@@ -59,6 +63,8 @@ async def create_a_subscribe_link(telegram_id, expiryTime, tariff):
                 telegram_id=telegram_id,
                 expire_at=datetime.now(tz=pytz.UTC) + timedelta(days=expiryTime),
                 active_internal_squads=['f92bea77-ab89-4f2c-bb60-2a7e4ad95257'],
+                traffic_limit_strategy='MONTH',
+                traffic_limit_bytes=limit_bytes,
                 external_squad_uuid=external_squad_uuid
             )
         )
