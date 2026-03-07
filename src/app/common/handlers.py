@@ -204,7 +204,7 @@ async def gift(message: types.Message):
         sub_repo = SubscriptionRepository()
         subscription_service_instance = subscription_service(sub_repo)
 
-        sub_link = await subscription_service_instance.give_trial(message.from_user.id, 15)
+        sub_link = await subscription_service_instance.give_trial(message.from_user.id)
 
         await message.answer(gift_text, parse_mode="HTML")
         await message.answer(f"<tg-spoiler>{sub_link}</tg-spoiler>", parse_mode='HTML')

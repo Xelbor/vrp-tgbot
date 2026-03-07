@@ -86,11 +86,11 @@ class subscription_service:
             if sub:
                 return subscribe_link
 
-    async def give_trial(self, user_id: int, days: int):
-        subscribe_link = await utils.create_a_subscribe_link(user_id, days, "trial")
+    async def give_trial(self, user_id: int):
+        subscribe_link = await utils.create_a_subscribe_link(user_id, 3650, "trial")
         
         if isinstance(subscribe_link, str):
-            sub = await self.sub_repo.add_subscription(user_id, 'trial', subscribe_link, days)
+            sub = await self.sub_repo.add_subscription(user_id, 'trial', subscribe_link, 3650)
             if sub != False:
                 return subscribe_link
         else:
