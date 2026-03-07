@@ -89,10 +89,10 @@ async def expand_subscribe_link(telegram_id: int, sub_link: str, tariff: str, da
             limit_bytes = 32212254720
             external_squad_uuid = 'a9dddb0e-1b30-4792-b11e-55f73153e5e3'
         case "tariff-2":
-            limit_bytes = None
+            limit_bytes = 0
             external_squad_uuid = '486e8d21-b21f-44da-8905-0f8027054c93'
         case "tariff-3":
-            limit_bytes = None
+            limit_bytes = 0
             external_squad_uuid = 'c7c7625b-3f03-40e5-a3e8-722fa01c7fda'
 
     try:
