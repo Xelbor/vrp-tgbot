@@ -166,7 +166,7 @@ async def get_user_traffic_limit(user_id: int, sub_link) -> int | None:
         
         for user in users:
             if user.subscription_url == sub_link:
-                return user.trafficLimitBytes
+                return user.traffic_limit_bytes
 
     except Exception as e:
         print(e)
