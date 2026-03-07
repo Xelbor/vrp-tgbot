@@ -306,6 +306,7 @@ async def get_user_home_data(telegram_id: int):
                 "traffic": user.user_traffic.used_traffic_bytes if user.user_traffic else 0,
                 "traffic_limit": user.traffic_limit_bytes,
                 "devices": devices,
+                "devices_limit": user.hwid_device_limit,
             })
 
         return subscriptions_data
