@@ -44,13 +44,13 @@ async def create_a_subscribe_link(telegram_id, expiryTime, tariff):
 
     match tariff:
         case "trial":
-            external_squad_uuid = ['d7f71a0d-0769-485f-bfad-33d0d27fa0bf']
+            external_squad_uuid = 'd7f71a0d-0769-485f-bfad-33d0d27fa0bf'
         case "tariff-1":
-            external_squad_uuid = ['a9dddb0e-1b30-4792-b11e-55f73153e5e3']
+            external_squad_uuid = 'a9dddb0e-1b30-4792-b11e-55f73153e5e3'
         case "tariff-2":
-            external_squad_uuid = ['486e8d21-b21f-44da-8905-0f8027054c93']
+            external_squad_uuid = '486e8d21-b21f-44da-8905-0f8027054c93'
         case "tariff-3":
-            external_squad_uuid = ['c7c7625b-3f03-40e5-a3e8-722fa01c7fda']
+            external_squad_uuid = 'c7c7625b-3f03-40e5-a3e8-722fa01c7fda'
 
     try:
         await remnawave.users.create_user(
