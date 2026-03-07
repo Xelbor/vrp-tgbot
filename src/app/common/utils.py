@@ -160,7 +160,6 @@ async def get_user_traffic(user_id: int, sub_link) -> int | None:
 async def get_user_traffic_limit(user_id: int, sub_link) -> int | None:
     try:
         users = await remnawave.users.get_users_by_telegram_id(user_id)
-        print(users)
 
         if not users:
             return None
