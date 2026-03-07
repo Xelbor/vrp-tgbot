@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: 5bfd359e
+      POSTGRES_PASSWORD: 941b2802
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - bot_network
+
+  bot:
+    build: .
+    command: python main.py
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    networks:
+      - bot_network
+
+  backend:
+    build: .
+    command: uvicorn backend:app --host 0.0.0.0 --port 5000
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+    networks:
+      - bot_network
+
+volumes:
+  pg-data:
+
+networks:
+  bot_network:
+    external: true
