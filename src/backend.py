@@ -255,42 +255,27 @@ def refresh(data: RefreshRequest):
 async def home(user_id: int = Depends(get_current_user)):
     subscription_service_instance = subscription_service(sub_repo)
     
+    # Синхронизация (если она нужна при каждом входе)
     await subscription_service_instance.sync_subscriptions(user_id)
     
     balance = user_repo.get_balance(user_id)
     
-    user_subscription_links = await utils.get_user_links(str(user_id))
+    # Вызываем нашу новую оптимизированную функцию
+    subscriptions = await utils.get_user_home_data(user_id)
 
-    if user_subscription_links is None:
+    if subscriptions is None:
         return {
             "balance": balance,
             "subscriptions": []
         }
 
-    subscriptions_data = []
-
-    for sub in user_subscription_links:
-        type = sub_repo.get_subscription_type(sub)
-
-        status = await utils.get_subscribtion_status(str(user_id), sub)
-        end_date = await utils.get_subscribe_end_date(str(user_id), sub)
-        traffic = await utils.get_user_traffic(str(user_id), sub)
-        traffic_limit = await utils.get_user_traffic_limit(str(user_id), sub)
-        devices = await utils.get_user_devices(str(user_id), sub)
-
-        subscriptions_data.append({
-            "link": sub,
-            "type": type,
-            "status": status,
-            "end_date": end_date,
-            "traffic": traffic,
-            "traffic_limit": traffic_limit,
-            "devices": devices
-        })
+    # Добавляем тип подписки из вашей локальной БД (sub_repo)
+    for sub in subscriptions:
+        sub["type"] = sub_repo.get_subscription_type(sub["link"])
 
     return {
         "balance": balance,
-        "subscriptions": subscriptions_data
+        "subscriptions": subscriptions
     }
 
 
@@ -299,11 +284,7 @@ async def home(user_id: int = Depends(get_current_user)):
 # -------------------------
 @app.post("/api/balance")
 async def balance(user_id: int = Depends(get_current_user)):
-    logger.info("Balance endpoint called for user_id: %s", user_id)
-
     balance = user_repo.get_balance(user_id)
-
-    logger.info("User balance: %s", balance)
 
     return {
         "balance": balance,

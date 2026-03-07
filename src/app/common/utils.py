@@ -274,6 +274,42 @@ async def delete_user_device(user_id, sub_link, hwid):
     except Exception as e:
         print(e)
         return None
+    
+async def get_user_home_data(telegram_id: int):
+    try:
+        # 1. Один раз получаем всех пользователей по ID
+        users = await remnawave.users.get_users_by_telegram_id(str(telegram_id))
+
+        if not users:
+            return []
+
+        subscriptions_data = []
+
+        for user in users:
+            # Если у пользователя нет ссылки, пропускаем его
+            if not user.subscription_url:
+                continue
+                
+            # Собираем данные из объекта 'user', который у нас уже есть
+            # Больше не нужно вызывать get_user_traffic, get_subscribtion_status и т.д.
+            
+            # Для девайсов всё же нужен отдельный запрос, так как это другой эндпоинт API
+            devices = await get_user_devices(str(telegram_id), user.subscription_url)
+
+            subscriptions_data.append({
+                "link": user.subscription_url,
+                "status": user.status,
+                "end_date": user.expire_at,
+                "traffic": user.user_traffic.used_traffic_bytes if user.user_traffic else 0,
+                "traffic_limit": user.traffic_limit_bytes,
+                "devices": devices,
+            })
+
+        return subscriptions_data
+
+    except Exception as e:
+        logger.error(f"Error in get_user_home_data: {e}")
+        return None
 
 def create_payment(amount: float, description: str, user_id: int):
     payment = Payment.create({
