@@ -4,7 +4,7 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 from app.users.db.repositories import UserRepository, SubscriptionRepository
 from app.users.services import referral_service, subscription_service
-from app.common.keyboards import main_kb, buy_key_kb, buy_balance_kb, payment_keyboard, mini_app_kb
+from app.common.keyboards import main_kb, buy_key_kb, buy_balance_kb, payment_keyboard, mini_app_kb, refs_inline
 from app.users.tariffs import prices_key, prices_balance
 from app.common.large_texts import *
 import app.common.utils as utils
