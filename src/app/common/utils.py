@@ -293,7 +293,7 @@ async def get_user_home_data(telegram_id: int):
             if not user.subscription_url:
                 continue
 
-            squad_data = remnawave.external_squads.get_external_squad_by_uuid(str(user.uuid))
+            squad_data = await remnawave.external_squads.get_external_squad_by_uuid(str(user.uuid))
             print(squad_data)
                 
             # Собираем данные из объекта 'user', который у нас уже есть
