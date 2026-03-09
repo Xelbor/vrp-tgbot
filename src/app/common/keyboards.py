@@ -24,8 +24,10 @@ refs_inline = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             InlineKeyboardButton(text='Как получить скидку 70%?', callback_data="refs_call"),
+        ], 
+        [
             InlineKeyboardButton(text='Приложение', web_app=WebAppInfo(url="https://cabinet.vrp-vpn.online/")),
-        ],
+        ]
     ]
 )
 
