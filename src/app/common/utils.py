@@ -292,6 +292,9 @@ async def get_user_home_data(telegram_id: int):
             # Если у пользователя нет ссылки, пропускаем его
             if not user.subscription_url:
                 continue
+
+            squad_data = remnawave.external_squads.get_external_squad_by_uuid(str(user.uuid))
+            print(squad_data)
                 
             # Собираем данные из объекта 'user', который у нас уже есть
             # Больше не нужно вызывать get_user_traffic, get_subscribtion_status и т.д.
