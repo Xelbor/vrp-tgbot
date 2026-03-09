@@ -14,9 +14,19 @@ main_kb = ReplyKeyboardMarkup(
         [KeyboardButton(text="🔑 Мои ключи"), KeyboardButton(text="💳 Пополнить баланс")],
         [KeyboardButton(text="🎁 Бесплатный период"), KeyboardButton(text="💰 Баланс")],
         [KeyboardButton(text="💸 Скидка"), KeyboardButton(text="💰 Купить ключ")],
+        [KeyboardButton(text="Приложение", web_app=WebAppInfo(url="https://cabinet.vrp-vpn.online/"))],
     ],
     resize_keyboard=True,
     input_field_placeholder="Выберите пункт меню."
+)
+
+refs_inline = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text='Как получить скидку 70%?', callback_data="refs_call"),
+            InlineKeyboardButton(text='Приложение', web_app=WebAppInfo(url="https://cabinet.vrp-vpn.online/")),
+        ],
+    ]
 )
 
 buy_key_kb = InlineKeyboardMarkup(

@@ -30,14 +30,6 @@ async def main(message: types.Message):
         ref_code=referral_service_instance.parse_ref(message.text)
     )
 
-    refs_inline = types.InlineKeyboardMarkup(
-        inline_keyboard=[
-            [
-                types.InlineKeyboardButton(text='Как получить скидку 70%?', callback_data="refs_call"),
-            ],
-        ]
-    )
-
     await message.answer(welcome_text, reply_markup=main_kb, parse_mode='HTML')
     await message.answer("ℹ️ Узнай, как получить скидку:", reply_markup=refs_inline)
 
